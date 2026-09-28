@@ -2,15 +2,24 @@
 
 A REST API for managing patients, doctors and patient–doctor assignments. Built with Django, Django REST Framework and PostgreSQL.
 
-## Setup
+## How to run
 
-Requires Python 3 and PostgreSQL.
+You'll need Python 3 and a running PostgreSQL server.
+
+Before starting, create a `.env` file in the project root with the following:
+
+- **PostgreSQL connection**: database name, username, password, host (e.g. `localhost`) and port (usually `5432`). The database and user must already exist.
+- **Django**: a secret key (also used to sign access tokens), debug mode on or off, and the allowed hosts (e.g. `localhost,127.0.0.1`).
+- **Access tokens**: how long an access token stays valid (in minutes) and how long a refresh token stays valid (in days).
+- **Email (SMTP)**: server, port, whether to use TLS, username, password and the "from" address. This is used to send the verification OTP.
+- **OTP**: how many minutes a verification OTP stays valid.
+
+Then install dependencies, create the tables and start the server:
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # then fill in the values
 python manage.py migrate
 python manage.py runserver
 ```
